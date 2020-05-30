@@ -1,13 +1,14 @@
+#!/usr/bin/env python
 FROM python:stretch
 
+# Work Directory
 
-#Work Directory
 COPY . /examples
 WORKDIR /examples
 
 # install dependencies
 RUN pip install --upgrade pip
-RUN pip install pytest==4.0.2
+COPY ./requirements.txt /examples/requirements.txt
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ENTRYPOINT ["gunicorn", "-b", "8080", "main:APP"]
